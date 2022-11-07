@@ -1,0 +1,7 @@
+.popup__modal-window {
+  position: relative;
+  display: flex;
+  width: 88.13%;
+  max-width: 430px;
+  border-radius: 10px;
+}

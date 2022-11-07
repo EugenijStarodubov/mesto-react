@@ -1,0 +1,10 @@
+.profile__places {
+	margin: 0 auto;
+	margin-bottom: 48px;
+}
+
+@media screen and (min-width: 1280px) {
+	.profile__places {
+		margin-bottom: 66px;
+	}
+}

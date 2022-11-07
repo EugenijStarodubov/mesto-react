@@ -1,0 +1,19 @@
+.profile__title-wrapper {
+  box-sizing: border-box;
+  grid-area: text-block;
+  max-width: 200px;
+}
+
+@media screen and (min-width: 400px) {
+  .profile__title-wrapper {
+    margin-right: 10px;
+    max-width: 250px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__title-wrapper {
+    margin-right: 20px;
+    max-width: 294px;
+  }
+}

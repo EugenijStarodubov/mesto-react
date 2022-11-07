@@ -1,0 +1,40 @@
+.profile__card {
+  box-sizing: border-box;
+  width: 88.13%;
+  min-width: 281px;
+  display: grid;
+  grid-template-areas:
+    'image'
+    'content'
+    'button';
+  grid-template-columns: minmax(50px, 1fr);
+  grid-template-rows: minmax(50px, max-content);
+  column-gap: 10px;
+  grid-auto-columns: 0;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 36px;
+}
+
+@media screen and (min-width: 400px) {
+  .profile__card {
+    column-gap: 2%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .profile__card {
+    padding: 0;
+    grid-template-areas: 'image content . button';
+    grid-template-columns: minmax(min-content, 100px) minmax(min-content, 189px) 1fr 20%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__card {
+    width: 100%;
+    column-gap: 30px;
+    margin-bottom: 48px;
+  }
+}

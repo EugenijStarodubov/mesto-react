@@ -1,0 +1,17 @@
+.places__like-button {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: url('../../../images/profile/like-button.svg') no-repeat center /
+    contain;
+  border: none;
+  min-width: 22px;
+  min-height: 19px;
+  transition: opacity 0.9s ease-out 0s;
+  z-index: 1;
+}
+
+.places__like-button:hover {
+  opacity: 0.5;
+}

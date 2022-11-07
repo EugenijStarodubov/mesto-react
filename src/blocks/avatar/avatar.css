@@ -1,0 +1,29 @@
+.avatar {
+  grid-area: image;
+  display: block;
+  object-fit: cover;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  transition: opacity 0.9s ease-out 0s;
+}
+
+.avatar:hover {
+  opacity: .2;
+}
+
+
+@media screen and (min-width: 768px) {
+  .avatar {
+    max-width: 140px;
+    max-height: 140px;
+    justify-self: start;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .avatar {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}

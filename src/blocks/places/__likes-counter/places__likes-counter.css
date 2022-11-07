@@ -1,0 +1,14 @@
+.places__likes-counter {
+  max-width: 42px;
+  margin: 0;
+  margin-top: 3px;
+  padding: 0;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

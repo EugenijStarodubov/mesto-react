@@ -1,0 +1,11 @@
+.header__logo {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 26px 0 30px 27px;
+}
+
+@media screen and (min-width: 1280px) {
+	.header__logo {
+		margin: 45px 0 41px 0;
+	}
+}

@@ -1,0 +1,23 @@
+.profile__content-wrapper {
+  grid-area: content;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-areas: '. text-block edit';
+  grid-template-columns: 1fr minmax(min-content, 189px) minmax(18px, 1fr);
+  column-gap: 8px;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 400px) {
+  .profile__content-wrapper {
+    margin: 24px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__content-wrapper {
+    grid-template-areas: 'text-block edit';
+    column-gap: 0;
+  }
+}

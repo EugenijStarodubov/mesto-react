@@ -1,0 +1,25 @@
+.places__item {
+  position: relative;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  max-height: 362px;
+  width: 100%;
+  min-width: 282px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 0;
+}
+
+@media screen and (min-width: 928px) {
+  .places__item {
+    min-width: 200px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .places__item {
+    max-width: 282px;
+  }
+}
