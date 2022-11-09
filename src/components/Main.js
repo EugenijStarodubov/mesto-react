@@ -3,20 +3,20 @@ import React from 'react';
 import avatar from '../images/profile/Avatar.jpg'
 
 
-function Main() {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, closeAllPopups }) {
 
 
-  function handleEditAvatarClick() {
-    document.querySelector('.popup_type_set-avatar').classList.add('popup_opened')
-  }
+  // function handleEditAvatarClick() {
+  //   document.querySelector('.popup_type_set-avatar').classList.add('popup_opened')
+  // }
 
-  function handleEditProfileClick() {
-    document.querySelector('.popup_type_edit').classList.add('popup_opened')
-  }
+  // function handleEditProfileClick() {
+  //   document.querySelector('.popup_type_edit').classList.add('popup_opened')
+  // }
 
-  function handleAddPlaceClick() {
-    document.querySelector('.popup_type_add').classList.add('popup_opened')
-  }
+  // function handleAddPlaceClick() {
+  //   document.querySelector('.popup_type_add').classList.add('popup_opened')
+  // }
 
 
 
@@ -29,7 +29,7 @@ function Main() {
             <div className="profile__avatar-container">
               <img src={avatar} alt="Путешественник"
                 className="avatar profile__avatar"
-                onClick={handleEditAvatarClick} />
+                onClick={onEditAvatar} />
             </div>
             <div className="profile__content-wrapper">
               <div className="profile__title-wrapper">
@@ -38,10 +38,10 @@ function Main() {
               </div>
               <button className="button edit-button profile__edit-button" type="button"
                 aria-label="Редактировать данные пользователя"
-                onClick={handleEditProfileClick} ></button>
+                onClick={onEditProfile} ></button>
             </div>
             <button className="button profile__add-button" type="button" aria-label="Добавить пользователя"
-              onClick={handleAddPlaceClick} ></button>
+              onClick={onAddPlace} ></button>
           </div>
           <section className="places profile__places">
             <ul className="places__items"></ul>

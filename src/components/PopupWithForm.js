@@ -4,13 +4,15 @@ import React from 'react';
 
 function PopupWithForm(props) {
 
+
   return (
     <>
-      <div className={`popup popup_${props.popup.name}`}>
+      <div className={`popup popup_${props.popup.name} ${props.isOpen ? 'popup_opened' : ''}`}>
         <div className="popup__modal-window" >
           <button className="button popup__close-button"
             type="button"
-            aria-label="Закрыть">
+            aria-label="Закрыть" onClick={props.onClose}>
+
           </button>
 
           <form action="#"
