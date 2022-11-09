@@ -12,5 +12,5 @@
   min-height: 26px;
   background-image: url('../../../images/edit-avatar.svg');
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: 0;
 }

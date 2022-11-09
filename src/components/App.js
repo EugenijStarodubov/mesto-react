@@ -4,127 +4,136 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm';
-
-
-
-
-
+import ImagePopup from './ImagePopup';
 
 function App() {
+  const popups = {
+    popupEdit:
+    {
+      title: 'Редактировать профиль',
+      name: 'type_edit',
+      buttonLabel: 'Сохранить',
+    },
+    popupAdd:
+    {
+      title: 'Новое место',
+      name: 'type_add',
+      buttonLabel: 'Сохранить',
+    },
+    popupSetAvatar:
+    {
+      title: 'Обновить аватар',
+      name: 'type_set-avatar',
+      buttonLabel: 'Сохранить',
+    }
+    ,
+    popupConfirm:
+    {
+      title: 'Вы уверены?',
+      name: 'type_confirm',
+      buttonLabel: 'Да',
+    }
+  }
+
+  const inputs = {
+
+    editNameInput:
+    {
+      type: 'text',
+      name: 'name',
+      placeholder: 'Имя'
+    },
+    editAboutInput: {
+      type: 'text',
+      name: 'about',
+      placeholder: 'О себе'
+
+    },
+
+    addPlacenameInput: {
+      type: 'text',
+      name: 'name',
+      placeholder: 'Название'
+    },
+    addPlaceUrlInput: {
+      type: 'url',
+      name: 'link',
+      placeholder: 'Ссылка на картинку'
+    },
+    avatarUrlInput:
+    {
+      type: 'url',
+      name: 'avatar',
+      placeholder: 'Ссылка на аватар'
+    }
+  }
+
+
   return (
     <div className="App">
       <div className="page">
         <div className="page__container">
+
           <Header />
           <Main />
           <Footer />
-          <PopupWithForm />
-
-        </div>
-        <div className="page__popup-wrapper">
-          <div className="popup popup_type_edit">
-            <div className="popup__modal-window">
-              <button className="button popup__close-button" type="button" aria-label="Закрыть"></button>
-              <form action="#" className="popup__form popup__form_type_edit" method="POST" name="name" id="form-edit" noValidate>
-                <h2 className="title popup__title">Редактировать профиль</h2>
-                <label className="popup__form-field">
-                  <input id="name-input" type="text" placeholder="Имя" className="popup__input popup__input_field_name"
-                    name="name" minLength="2" maxLength="40" required />
-                  <span id="name-input-error" className="popup__error"></span>
-                </label>
-                <label className="popup__form-field">
-                  <input id="about-input" type="text" placeholder="О себе" className="popup__input popup__input_field_job"
-                    name="about" minLength="2" maxLength="200" required />
-                  <span id="about-input-error" className="popup__error"></span>
-                </label>
-                <button type="submit" className="button popup__button popup__button_type_edit" aria-label="Сохранить"
-                  name="edit-form-button">
-                  Сохранить
-                </button>
-              </form>
-            </div>
-          </div>
-          <div className="popup popup_type_add">
-            <div className="popup__modal-window">
-              <button className="button popup__close-button" type="button" aria-label="Закрыть"></button>
-              <form action="#" className="popup__form popup__form_type_add" method="POST" name="add-card" id="form-add"
-                noValidate>
-                <h2 className="title popup__title">Новое место</h2>
-                <label className="popup__form-field">
-                  <input id="placename-input" type="text" placeholder="Название"
-                    className="popup__input popup__input_field_card-name" name="name" minLength="2" maxLength="30" required />
-                  <span id="placename-input-error" className="popup__error"></span>
-                </label>
-                <label className="popup__form-field">
-                  <input id="image-input" type="url" placeholder="Ссылка на картинку"
-                    className="popup__input popup__input_field_card-image-link" name="link" required />
-                  <span id="image-input-error" className="popup__error"></span>
-                </label>
-                <button type="submit" className="button popup__button popup__button_type_add" aria-label="Создать"
-                  name="add-form-button">
-                  Создать
-                </button>
-              </form>
-            </div>
-          </div>
-          <div className="popup popup_type_set-avatar">
-            <div className="popup__modal-window">
-              <button className="button popup__close-button" type="button" aria-label="Закрыть"></button>
-              <form action="#" className="popup__form popup__form_type_set-avatar" method="POST" name="set-avatar"
-                id="form-avatar" noValidate>
-                <h2 className="title popup__title">Обновить аватар</h2>
-                <label className="popup__form-field">
-                  <input id="avatar" type="url" placeholder="Ссылка на аватар"
-                    className="popup__input popup__input_field_avatar-link" name="avatar" required />
-                  <span id="avatar-error" className="popup__error"></span>
-                </label>
-                <button type="submit" className="button popup__button popup__button_type_set-avatar" aria-label="Сохранить"
-                  name="set-avatar-form-button">
-                  Сохранить
-                </button>
-              </form>
-            </div>
-          </div>
-          <div className="popup popup_type_image">
-            <div className="popup__modal-window popup__modal-window_type_image">
-              <figure className="popup__show-image">
-                <button className="button popup__close-button popup__close-button_place_image" type="button"
-                  aria-label="Закрыть"></button>
-                <img src="#" alt="#" className="popup__image popup__item" />
-                <figcaption className="popup__image-caption"></figcaption>
-              </figure>
-            </div>
-          </div>
-          <div className="popup popup_type_confirm">
-            <div className="popup__modal-window">
-              <button className="button popup__close-button" type="button" aria-label="Закрыть"></button>
-              <div className="popup__confirm-window">
-                <p className="title popup__title">Вы уверены?</p>
-                <button type="submit" className="button popup__button popup__button_type_confirm" aria-label="Да"
-                  name="confirm-button">
-                  Да
-                </button>
-              </div>
-            </div>
+          <div className="page__popup-wrapper">
+            <PopupWithForm popup={popups.popupEdit} inputName={inputs.editNameInput} inputAbout={inputs.editAboutInput}>
+              <label className="popup__form-field" >
+                <input id="name-input" type={inputs.editNameInput.type} className="popup__input popup__input_field_name"
+                  name={inputs.editNameInput.name} placeholder={inputs.editNameInput.placeholder} required />
+                <span id="name-input-error" className="popup__error"></span>
+              </label>
+              <label className="popup__form-field" >
+                <input id="name-input" type={inputs.editAboutInput.type} className="popup__input popup__input_field_name"
+                  name={inputs.editAboutInput.name} required placeholder={inputs.editAboutInput.placeholder} />
+                <span id="name-input-error" className="popup__error"></span>
+              </label>
+            </PopupWithForm>
+            <PopupWithForm popup={popups.popupAdd} inputName={inputs.addPlacenameInput} inputAbout={inputs.addPlaceUrlInput}>
+              <label className="popup__form-field" >
+                <input id="name-input" type={inputs.addPlacenameInput.type} className="popup__input popup__input_field_name"
+                  name={inputs.addPlacenameInput.name} placeholder={inputs.addPlacenameInput.placeholder} required />
+                <span id="name-input-error" className="popup__error"></span>
+              </label>
+              <label className="popup__form-field" >
+                <input id="name-input" type={inputs.addPlaceUrlInput.type} className="popup__input popup__input_field_name"
+                  name={inputs.addPlaceUrlInput.name} required placeholder={inputs.addPlaceUrlInput.placeholder} />
+                <span id="name-input-error" className="popup__error"></span>
+              </label>
+            </PopupWithForm>
+            <PopupWithForm popup={popups.popupSetAvatar} inputName={inputs.avatarUrlInput} >
+              <label className="popup__form-field" >
+                <input id="name-input" type={inputs.avatarUrlInput.type} className="popup__input popup__input_field_name"
+                  name={inputs.avatarUrlInput.name} placeholder={inputs.avatarUrlInput.placeholder} required />
+                <span id="name-input-error" className="popup__error"></span>
+              </label>
+            </PopupWithForm>
+            <PopupWithForm popup={popups.popupConfirm} />
+            <ImagePopup />
           </div>
         </div>
-        <template id="cardtemplate">
-          <li className="places__item">
-            <button className="button places__delete-button" type="button"></button>
-            <img src="#" alt="#" className="places__image" />
-            <div className="text-content places__text-content">
-              <h2 className="title places__title"></h2>
-              <div className="places__like-block">
-                <button type="button" className="button places__like-button" aria-label="Нравится"></button>
-                <p className="places__likes-counter">0</p>
-              </div>
 
 
-            </div>
-          </li>
-        </template>
+
       </div>
-    </div>
+      <template id="cardtemplate">
+        <li className="places__item">
+          <button className="button places__delete-button" type="button"></button>
+          <img src="#" alt="#" className="places__image" />
+          <div className="text-content places__text-content">
+            <h2 className="title places__title"></h2>
+            <div className="places__like-block">
+              <button type="button" className="button places__like-button" aria-label="Нравится"></button>
+              <p className="places__likes-counter">0</p>
+            </div>
+
+
+          </div>
+        </li>
+      </template>
+    </div >
+
   );
 }
 
