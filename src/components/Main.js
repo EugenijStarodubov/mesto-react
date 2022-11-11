@@ -3,28 +3,13 @@ import React from 'react';
 import avatar from '../images/profile/Avatar.jpg'
 
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, closeAllPopups }) {
-
-
-  // function handleEditAvatarClick() {
-  //   document.querySelector('.popup_type_set-avatar').classList.add('popup_opened')
-  // }
-
-  // function handleEditProfileClick() {
-  //   document.querySelector('.popup_type_edit').classList.add('popup_opened')
-  // }
-
-  // function handleAddPlaceClick() {
-  //   document.querySelector('.popup_type_add').classList.add('popup_opened')
-  // }
-
-
+function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
 
 
   return (
     <>
-      <main className="content page__content">
-        <article className="profile">
+      <main className="content page__content" >
+        <article className="profile" >
           <div className="profile__card">
             <div className="profile__avatar-container">
               <img src={avatar} alt="Путешественник"

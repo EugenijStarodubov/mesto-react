@@ -87,20 +87,19 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
+
   }
 
-
-
   return (
-    <div className="App">
-      <div className="page">
+    <div className="App" >
+      <div className="page" >
         <div className="page__container">
 
           <Header />
           <Main onEditProfile={handleIsEditProfileOpen} onAddPlace={handleIsAddPlacePopupOpen} onEditAvatar={handleIsEditAvatarPopupOpen} />
           <Footer />
           <div className="page__popup-wrapper">
-            <PopupWithForm isOpen={isEditProfileOpen} popup={popups.popupEdit} inputName={inputs.editNameInput} inputAbout={inputs.editAboutInput} onClose={closeAllPopups} >
+            <PopupWithForm isOpen={isEditProfileOpen} popup={popups.popupEdit} inputName={inputs.editNameInput} inputAbout={inputs.editAboutInput} onClose={closeAllPopups}  >
               <label className="popup__form-field" >
                 <input id="name-input" type={inputs.editNameInput.type} className="popup__input popup__input_field_name"
                   name={inputs.editNameInput.name} placeholder={inputs.editNameInput.placeholder} required />

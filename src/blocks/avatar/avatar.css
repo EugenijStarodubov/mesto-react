@@ -6,6 +6,7 @@
   max-height: 120px;
   border-radius: 50%;
   transition: opacity 0.9s ease-out 0s;
+  cursor: pointer;
 }
 
 .avatar:hover {
