@@ -9,7 +9,7 @@ function PopupWithForm(props) {
   }
 
   // const handleEscapeClose = (e) => {
-  //   (e.keyCode === 27) && props.onClose();
+  //   (e.key === 'Escape') && props.onClose();
   // }
 
   return (
@@ -23,6 +23,7 @@ function PopupWithForm(props) {
             type="button"
             aria-label="Закрыть"
             onClick={props.onClose}
+
           >
 
           </button>

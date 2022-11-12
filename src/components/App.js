@@ -87,8 +87,14 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
-
   }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', (e) => (e.key === 'Escape') && closeAllPopups())
+    return () => document.removeEventListener('keydown',)
+  }, [])
+
+
 
   return (
     <div className="App" >
