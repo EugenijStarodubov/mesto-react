@@ -1,31 +1,21 @@
 import React from 'react';
 
-
-
 function PopupWithForm(props) {
 
   const handleClosePopup = (e) => {
     (e.target === e.currentTarget) && props.onClose();
   }
 
-  // const handleEscapeClose = (e) => {
-  //   (e.key === 'Escape') && props.onClose();
-  // }
-
   return (
     <>
       <div className={`popup popup_${props.popup.name} popup_${props.popup.name} ${props.isOpen ? 'popup_opened' : ''}`}
         onClick={handleClosePopup}
-
       >
         <div className="popup__modal-window" >
           <button className="button popup__close-button"
             type="button"
             aria-label="Закрыть"
-            onClick={props.onClose}
-
-          >
-
+            onClick={props.onClose}>
           </button>
 
           <form action="#"
@@ -33,10 +23,9 @@ function PopupWithForm(props) {
             method="POST"
             name={`form-${props.popup.name}`}
             id={`form-${props.popup.name}`}
-
             noValidate>
-
             <h2 className="title popup__title">{props.popup.title}</h2>
+
             {props.children}
 
             <button type="submit"

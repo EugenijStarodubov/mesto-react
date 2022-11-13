@@ -1,10 +1,28 @@
 import React from 'react';
+import Card from './Card';
+import { api } from '../utils/Api'
 
-import avatar from '../images/profile/Avatar.jpg'
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [useAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+  React.useEffect(() => {
+    api.getUser().then(data => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    })
+      .catch(err => console.log(err.message));
+  }, []);
 
+  React.useEffect(() => {
+    api.getCards().then(
+      cards => setCards(cards))
+      .catch(err => console.log(err.message));
+  }, []);
 
   return (
     <>
@@ -12,14 +30,14 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
         <article className="profile" >
           <div className="profile__card">
             <div className="profile__avatar-container">
-              <img src={avatar} alt="Путешественник"
+              <img src={useAvatar} alt="Путешественник"
                 className="avatar profile__avatar"
                 onClick={onEditAvatar} />
             </div>
             <div className="profile__content-wrapper">
               <div className="profile__title-wrapper">
-                <h1 className="profile__title">Жак-Ив Кусто</h1>
-                <p className="subtitle profile__subtitle">Исследователь океана</p>
+                <h1 className="profile__title">{userName}</h1>
+                <p className="subtitle profile__subtitle">{userDescription}</p>
               </div>
               <button className="button edit-button profile__edit-button" type="button"
                 aria-label="Редактировать данные пользователя"
@@ -29,24 +47,15 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
               onClick={onAddPlace} ></button>
           </div>
           <section className="places profile__places">
-            <ul className="places__items"></ul>
+            <ul className="places__items">
+              {
+                cards.map(card => {
+                  return (<Card card={card} key={card._id} onClick={onCardClick} />)
+                })
+              }
+            </ul>
           </section>
         </article>
-        <template id="cardtemplate">
-          <li className="places__item">
-            <button className="button places__delete-button" type="button"></button>
-            <img src="#" alt="#" className="places__image" />
-            <div className="text-content places__text-content">
-              <h2 className="title places__title"></h2>
-              <div className="places__like-block">
-                <button type="button" className="button places__like-button" aria-label="Нравится"></button>
-                <p className="places__likes-counter">0</p>
-              </div>
-
-
-            </div>
-          </li>
-        </template>
       </main>
     </>
   );
