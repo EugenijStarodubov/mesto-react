@@ -29,11 +29,13 @@ function App() {
     setSelectedCard({ name: card.name, link: card.link, isOpen: true })
   };
 
-  const closeAllPopups = () => {
+  const closeAllPopups = (card) => {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard({ name: '', link: '', isOpen: false });
+
+    //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
+    setSelectedCard({ name: card.name, link: card.link, isOpen: false });
   };
 
   React.useEffect(() => {
