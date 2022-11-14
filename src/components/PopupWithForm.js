@@ -5,7 +5,7 @@ function PopupWithForm(props) {
   return (
     <div className={`popup popup_${props.popup.name} popup_${props.popup.name} ${props.isOpen ? 'popup_opened' : ''}`}
       onClick={
-        (e) => (e.target === e.currentTarget) && props.onClose()
+        (e) => (e.target === e.currentTarget) && props.onClose({})
       }>
       <div className="popup__modal-window" >
         <button className="button popup__close-button"

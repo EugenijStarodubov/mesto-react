@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import { api } from '../utils/Api';
 import { popups, inputs } from '../utils/utils';
 
 function App() {
@@ -11,7 +12,17 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false })
+  const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
+
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  React.useEffect(() => {
+    api.getUser()
+      .then(data => setCurrentUser(data))
+      .catch(err => console.log(err.message))
+  }, [])
+
+  console.log(currentUser)
 
   const handleIsAddPlacePopupOpen = () => {
     setIsAddPlacePopupOpen(true);
@@ -39,7 +50,7 @@ function App() {
   };
 
   React.useEffect(() => {
-    const close = (e) => { (e.key === 'Escape') && closeAllPopups() };
+    const close = (e) => { (e.key === 'Escape') && closeAllPopups({}) };
 
     return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || selectedCard.isOpen)
       ? document.addEventListener('keydown', close)

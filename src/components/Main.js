@@ -7,7 +7,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [useAvatar, setUserAvatar] = React.useState('');
-  const [userID, setUserId] = React.useState([])
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -15,7 +14,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       setUserName(data.name);
       setUserDescription(data.about);
       setUserAvatar(data.avatar);
-      setUserId(data._id);
     })
       .catch(err => console.log(err.message));
 
@@ -49,7 +47,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
           <ul className="places__items">
             {
               cards.map(card => {
-                return (<Card card={card} key={card._id} onClick={onCardClick} currentUserId={userID} />)
+                return (<Card card={card} key={card._id} onClick={onCardClick} />)
               })
             }
           </ul>

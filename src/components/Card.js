@@ -10,12 +10,7 @@ function Card(props) {
 
   return (
     <li className="places__item">
-
-      {
-        (props.card.owner._id === props.currentUserId)
-        && <DeleteButton />
-      }
-
+      <DeleteButton />
       <img src={props.card.link} alt={props.card.name} className="places__image" onClick={handleClick} />
       <div className="text-content places__text-content">
         <h2 className="title places__title">{props.card.name}</h2>
