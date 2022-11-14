@@ -7,13 +7,6 @@ export const config = {
   errorClass: 'popup__error_visible',
 };
 
-export const cardsContainer = document.querySelector('.places__items')
-export const userSelectorsData = {
-  userName: '.profile__title',
-  userInfo: '.profile__subtitle',
-  avatar: '.profile__avatar'
-}
-
 export const popups = {
   popupEdit:
   {

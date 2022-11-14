@@ -1,11 +1,10 @@
 import React from "react";
-import { cardsContainer } from "../utils/utils";
 
 function Card(props) {
 
   const handleClick = () => {
     props.onClick(props.card);
-  }
+  };
 
   return (
     <li className="places__item">
@@ -20,6 +19,6 @@ function Card(props) {
       </div>
     </li>
   );
-}
+};
 
 export default Card

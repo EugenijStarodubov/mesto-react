@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { api } from '../utils/Api'
+import { api } from '../utils/Api';
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 
@@ -16,49 +16,45 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       setUserAvatar(data.avatar);
     })
       .catch(err => console.log(err.message));
-  }, []);
 
-  React.useEffect(() => {
     api.getCards().then(
       cards => setCards(cards))
       .catch(err => console.log(err.message));
   }, []);
 
   return (
-    <>
-      <main className="content page__content" >
-        <article className="profile" >
-          <div className="profile__card">
-            <div className="profile__avatar-container">
-              <img src={useAvatar} alt="Путешественник"
-                className="avatar profile__avatar"
-                onClick={onEditAvatar} />
-            </div>
-            <div className="profile__content-wrapper">
-              <div className="profile__title-wrapper">
-                <h1 className="profile__title">{userName}</h1>
-                <p className="subtitle profile__subtitle">{userDescription}</p>
-              </div>
-              <button className="button edit-button profile__edit-button" type="button"
-                aria-label="Редактировать данные пользователя"
-                onClick={onEditProfile} ></button>
-            </div>
-            <button className="button profile__add-button" type="button" aria-label="Добавить пользователя"
-              onClick={onAddPlace} ></button>
+    <main className="content page__content" >
+      <article className="profile" >
+        <div className="profile__card">
+          <div className="profile__avatar-container">
+            <img src={useAvatar} alt="Путешественник"
+              className="avatar profile__avatar"
+              onClick={onEditAvatar} />
           </div>
-          <section className="places profile__places">
-            <ul className="places__items">
-              {
-                cards.map(card => {
-                  return (<Card card={card} key={card._id} onClick={onCardClick} />)
-                })
-              }
-            </ul>
-          </section>
-        </article>
-      </main>
-    </>
+          <div className="profile__content-wrapper">
+            <div className="profile__title-wrapper">
+              <h1 className="profile__title">{userName}</h1>
+              <p className="subtitle profile__subtitle">{userDescription}</p>
+            </div>
+            <button className="button edit-button profile__edit-button" type="button"
+              aria-label="Редактировать данные пользователя"
+              onClick={onEditProfile} ></button>
+          </div>
+          <button className="button profile__add-button" type="button" aria-label="Добавить пользователя"
+            onClick={onAddPlace} ></button>
+        </div>
+        <section className="places profile__places">
+          <ul className="places__items">
+            {
+              cards.map(card => {
+                return (<Card card={card} key={card._id} onClick={onCardClick} />)
+              })
+            }
+          </ul>
+        </section>
+      </article>
+    </main>
   );
-}
+};
 
 export default Main;

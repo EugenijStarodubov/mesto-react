@@ -11,99 +11,98 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedState, setSelectedState] = React.useState({ name: '', link: '', isOpen: false })
+  const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false })
 
   const handleIsAddPlacePopupOpen = () => {
     setIsAddPlacePopupOpen(true);
-  }
+  };
 
   const handleIsEditProfileOpen = () => {
     setIsEditProfileOpen(true);
-  }
+  };
+
   const handleIsEditAvatarPopupOpen = () => {
     setIsEditAvatarPopupOpen(true);
-  }
+  };
 
   const handleCardClick = (card) => {
-    setSelectedState({ name: card.name, link: card.link, isOpen: true })
-  }
+    setSelectedCard({ name: card.name, link: card.link, isOpen: true })
+  };
 
   const closeAllPopups = () => {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedState({ name: '', link: '', isOpen: false });
-  }
+    setSelectedCard({ name: '', link: '', isOpen: false });
+  };
 
   React.useEffect(() => {
     const close = (e) => { (e.key === 'Escape') && closeAllPopups() };
 
-    return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || selectedState.isOpen)
+    return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || selectedCard.isOpen)
       ? document.addEventListener('keydown', close)
       : () => document.removeEventListener('keydown', close);
   });
 
   return (
-    <div className="App" >
-      <div className="page" >
-        <div className="page__container">
+    <div className="page" >
+      <div className="page__container">
 
-          <Header />
+        <Header />
 
-          <Main onEditProfile={handleIsEditProfileOpen}
-            onAddPlace={handleIsAddPlacePopupOpen}
-            onEditAvatar={handleIsEditAvatarPopupOpen}
-            onCardClick={handleCardClick} />
+        <Main onEditProfile={handleIsEditProfileOpen}
+          onAddPlace={handleIsAddPlacePopupOpen}
+          onEditAvatar={handleIsEditAvatarPopupOpen}
+          onCardClick={handleCardClick} />
 
-          <Footer />
+        <Footer />
 
-          <div className="page__popup-wrapper">
-            <PopupWithForm isOpen={isEditProfileOpen}
-              popup={popups.popupEdit} inputName={inputs.editNameInput} inputAbout={inputs.editAboutInput}
-              onClose={closeAllPopups}  >
-              <label className="popup__form-field" >
-                <input id="name-input" type={inputs.editNameInput.type} className="popup__input popup__input_field_name"
-                  name={inputs.editNameInput.name} placeholder={inputs.editNameInput.placeholder} required />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-              <label className="popup__form-field" >
-                <input id="name-input" type={inputs.editAboutInput.type} className="popup__input popup__input_field_name"
-                  name={inputs.editAboutInput.name} required placeholder={inputs.editAboutInput.placeholder} />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-            </PopupWithForm>
+        <div className="page__popup-wrapper">
+          <PopupWithForm isOpen={isEditProfileOpen}
+            popup={popups.popupEdit} inputName={inputs.editNameInput} inputAbout={inputs.editAboutInput}
+            onClose={closeAllPopups}  >
+            <label className="popup__form-field" >
+              <input id="name-input" type={inputs.editNameInput.type} className="popup__input popup__input_field_name"
+                name={inputs.editNameInput.name} placeholder={inputs.editNameInput.placeholder} required />
+              <span id="name-input-error" className="popup__error"></span>
+            </label>
+            <label className="popup__form-field" >
+              <input id="name-input" type={inputs.editAboutInput.type} className="popup__input popup__input_field_name"
+                name={inputs.editAboutInput.name} required placeholder={inputs.editAboutInput.placeholder} />
+              <span id="name-input-error" className="popup__error"></span>
+            </label>
+          </PopupWithForm>
 
-            <PopupWithForm popup={popups.popupAdd} inputName={inputs.addPlacenameInput} inputAbout={inputs.addPlaceUrlInput}
-              isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} >
-              <label className="popup__form-field" >
-                <input id="name-input" type={inputs.addPlacenameInput.type} className="popup__input popup__input_field_name"
-                  name={inputs.addPlacenameInput.name} placeholder={inputs.addPlacenameInput.placeholder} required />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-              <label className="popup__form-field" >
-                <input id="name-input" type={inputs.addPlaceUrlInput.type} className="popup__input popup__input_field_name"
-                  name={inputs.addPlaceUrlInput.name} required placeholder={inputs.addPlaceUrlInput.placeholder} />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-            </PopupWithForm>
+          <PopupWithForm popup={popups.popupAdd} inputName={inputs.addPlacenameInput} inputAbout={inputs.addPlaceUrlInput}
+            isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} >
+            <label className="popup__form-field" >
+              <input id="name-input" type={inputs.addPlacenameInput.type} className="popup__input popup__input_field_name"
+                name={inputs.addPlacenameInput.name} placeholder={inputs.addPlacenameInput.placeholder} required />
+              <span id="name-input-error" className="popup__error"></span>
+            </label>
+            <label className="popup__form-field" >
+              <input id="name-input" type={inputs.addPlaceUrlInput.type} className="popup__input popup__input_field_name"
+                name={inputs.addPlaceUrlInput.name} required placeholder={inputs.addPlaceUrlInput.placeholder} />
+              <span id="name-input-error" className="popup__error"></span>
+            </label>
+          </PopupWithForm>
 
-            <PopupWithForm popup={popups.popupSetAvatar} inputName={inputs.avatarUrlInput}
-              isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} >
-              <label className="popup__form-field" >
-                <input id="name-input" type={inputs.avatarUrlInput.type} className="popup__input popup__input_field_name"
-                  name={inputs.avatarUrlInput.name} placeholder={inputs.avatarUrlInput.placeholder} required />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-            </PopupWithForm >
+          <PopupWithForm popup={popups.popupSetAvatar} inputName={inputs.avatarUrlInput}
+            isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} >
+            <label className="popup__form-field" >
+              <input id="name-input" type={inputs.avatarUrlInput.type} className="popup__input popup__input_field_name"
+                name={inputs.avatarUrlInput.name} placeholder={inputs.avatarUrlInput.placeholder} required />
+              <span id="name-input-error" className="popup__error"></span>
+            </label>
+          </PopupWithForm >
 
-            <PopupWithForm popup={popups.popupConfirm} />
+          <PopupWithForm popup={popups.popupConfirm} />
 
-            <ImagePopup card={selectedState} onClose={closeAllPopups} />
-          </div>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
       </div>
-    </div >
+    </div>
   );
-}
+};
 
 export default App;
