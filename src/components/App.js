@@ -22,8 +22,6 @@ function App() {
       .catch(err => console.log(err.message))
   }, [])
 
-  console.log(currentUser)
-
   const handleIsAddPlacePopupOpen = () => {
     setIsAddPlacePopupOpen(true);
   };
