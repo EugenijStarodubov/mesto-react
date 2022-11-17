@@ -8,62 +8,9 @@ export const config = {
 };
 
 export const popups = {
-  popupEdit:
-  {
-    title: 'Редактировать профиль',
-    name: 'type_edit',
-    buttonLabel: 'Сохранить',
-  },
-  popupAdd:
-  {
-    title: 'Новое место',
-    name: 'type_add',
-    buttonLabel: 'Сохранить',
-  },
-  popupSetAvatar:
-  {
-    title: 'Обновить аватар',
-    name: 'type_set-avatar',
-    buttonLabel: 'Сохранить',
-  }
-  ,
-  popupConfirm:
-  {
-    title: 'Вы уверены?',
-    name: 'type_confirm',
-    buttonLabel: 'Да',
-  }
+  buttonPopupsWithForm: 'Сохранить',
+  buttonPopupsWithConfirm: 'Да',
 }
 
-export const inputs = {
 
-  editNameInput:
-  {
-    type: 'text',
-    name: 'name',
-    placeholder: 'Имя'
-  },
-  editAboutInput: {
-    type: 'text',
-    name: 'about',
-    placeholder: 'О себе'
 
-  },
-
-  addPlacenameInput: {
-    type: 'text',
-    name: 'name',
-    placeholder: 'Название'
-  },
-  addPlaceUrlInput: {
-    type: 'url',
-    name: 'link',
-    placeholder: 'Ссылка на картинку'
-  },
-  avatarUrlInput:
-  {
-    type: 'url',
-    name: 'avatar',
-    placeholder: 'Ссылка на аватар'
-  }
-}

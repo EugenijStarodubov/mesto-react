@@ -53,6 +53,11 @@ class Api {
     return this.#renderRequest(`cards/${id}/likes`, 'DELETE');
   }
 
+  changeLikeCardStatus(id, isLiked) {
+    return isLiked ? this.setLike(id) : this.removeLike(id);
+  }
+
+
   deleteCard(id) {
     return this.#renderRequest(`cards/${id}`, "DELETE");
   }
