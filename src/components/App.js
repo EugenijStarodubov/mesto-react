@@ -6,7 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/Api';
-import { popups, inputs } from '../utils/utils';
+import { popups } from '../utils/utils';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
 
-  const [currentUser, setCurrentUser] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '' });
 
   React.useEffect(() => {
     api.getUser()
@@ -32,7 +32,12 @@ function App() {
       : () => document.removeEventListener('keydown', close);
   });
 
-
+  const handleUpdateUser = (values) => {
+    api.updateUser(values)
+      .then(data => setCurrentUser(data))
+      .catch(err => console.log(err.message));
+    closeAllPopups({});
+  }
 
   const handleIsAddPlacePopupOpen = () => {
     setIsAddPlacePopupOpen(true);
@@ -79,27 +84,8 @@ function App() {
           <Footer />
 
           <div className="page__popup-wrapper">
-            <PopupWithForm title="Редактировать профиль" name="type_edit"
-              isOpen={isEditProfileOpen}
-              onClose={closeAllPopups}
-              buttonLabel={popups.buttonPopupsWithForm}>
 
-              <label className="popup__form-field" >
-                <input id="name-input" type="text"
-                  className="popup__input popup__input_field_name"
-                  name="name" placeholder="Имя"
-                  required />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-
-              <label className="popup__form-field" >
-                <input id="name-input" type="text"
-                  className="popup__input popup__input_field_name"
-                  name="about" required placeholder="О себе" />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-            </PopupWithForm>
-            {/* <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} /> */}
+            <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} buttonLabel={popups.buttonPopupsWithForm} />
 
             <PopupWithForm title="Новое место" name="type_add"
               isOpen={isAddPlacePopupOpen}

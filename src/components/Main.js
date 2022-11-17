@@ -25,9 +25,19 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      // Обновляем стейт
       setCards(newCards);
-    });
+    })
+      .catch(err => console.log(err.message));
+  }
+
+  const handleCardDelete = (id) => {
+    const newCards = cards.filter(c =>
+      id !== c._id
+    );
+    api.deleteCard(id).then(() => {
+      setCards(newCards);
+    })
+      .catch(err => console.log(err.message));
   }
 
   return (
@@ -55,7 +65,12 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
           <ul className="places__items">
             {
               cards.map(card => {
-                return (<Card card={card} key={card._id} onClick={onCardClick} onCardLike={handleCardLike} />)
+
+                return (<Card card={card} key={card._id}
+                  onClick={onCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                />)
               })
             }
           </ul>

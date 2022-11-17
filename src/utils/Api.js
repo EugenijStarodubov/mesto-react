@@ -62,6 +62,11 @@ class Api {
     return this.#renderRequest(`cards/${id}`, "DELETE");
   }
 
+  updateCards(cards) {
+
+    return this.#renderRequest('cards', 'POST', cards);
+  }
+
   setAvatar(data) {
     return this.#renderRequest('users/me/avatar', 'PATCH', data);
   }
