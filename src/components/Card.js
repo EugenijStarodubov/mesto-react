@@ -17,8 +17,11 @@ function Card(props) {
 
   const handleDeleteClick = () => {
 
-    props.onCardDelete(props.card._id);
+    props.onDeleteClick(props.card._id);
+
+    // props.onCardDelete(props.card._id);
   }
+
 
   const isLiked = props.card.likes.some(like => like._id === currentUser._id);
 

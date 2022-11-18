@@ -16,6 +16,10 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
+
+  const [deletedCardId, setDeletedCerdId] = React.useState('')
+
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
 
   const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '', avatar: '' });
@@ -29,10 +33,7 @@ function App() {
     api.getCards().then(
       cards => setCards(cards))
       .catch(err => console.log(err.message));
-    // }, []);
 
-
-    // React.useEffect(() => {
     api.getUser()
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message))
@@ -41,10 +42,10 @@ function App() {
   React.useEffect(() => {
     const close = (e) => { (e.key === 'Escape') && closeAllPopups({}) };
 
-    return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || selectedCard.isOpen)
+    return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || isConfirmPopupOpen || selectedCard.isOpen)
       ? document.addEventListener('keydown', close)
       : () => document.removeEventListener('keydown', close);
-  }, []);
+  });
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -87,6 +88,13 @@ function App() {
     closeAllPopups({});
   }
 
+  const handleConfirmSubmit = (e) => {
+    e.preventDefault();
+    handleCardDelete(deletedCardId);
+    setDeletedCerdId('');
+    closeAllPopups({});
+  }
+
   const handleIsAddPlacePopupOpen = () => {
     setIsAddPlacePopupOpen(true);
   };
@@ -99,6 +107,11 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   };
 
+  const handleIsConfirmPopupOpen = (id) => {
+    setIsConfirmPopupOpen(true);
+    setDeletedCerdId(id);
+  };
+
   const handleCardClick = (card) => {
     setSelectedCard({ name: card.name, link: card.link, isOpen: true })
   };
@@ -107,6 +120,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsConfirmPopupOpen(false);
 
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
     setSelectedCard({ name: card.name, link: card.link, isOpen: false });
@@ -128,6 +142,7 @@ function App() {
             onAddPlace={handleIsAddPlacePopupOpen}
             onEditAvatar={handleIsEditAvatarPopupOpen}
             onCardClick={handleCardClick}
+            onDeleteClick={handleIsConfirmPopupOpen}
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete} />
@@ -153,10 +168,12 @@ function App() {
               buttonLabel={popups.buttonPopupsWithForm}
             />
 
-
-
-
-            <PopupWithForm title="Вы уверены?" name="type_confirm" />
+            <PopupWithForm title="Вы уверены?" name="type_confirm"
+              isOpen={isConfirmPopupOpen}
+              onSubmit={handleConfirmSubmit}
+              onClose={closeAllPopups}
+              buttonLabel={popups.buttonPopupsWithConfirm}
+            />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           </div>

@@ -3,7 +3,7 @@ import Card from './Card';
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onDeleteClick }) {
 
 
 
@@ -43,7 +43,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
                 return (<Card card={card} key={card._id}
                   onClick={onCardClick}
                   onCardLike={onCardLike}
-                  onCardDelete={onCardDelete}
+                  onDeleteClick={onDeleteClick}
                 />)
               })
             }
