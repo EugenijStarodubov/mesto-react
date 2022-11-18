@@ -18,7 +18,7 @@ const EditProfilePopup = (props) => {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
@@ -27,6 +27,8 @@ const EditProfilePopup = (props) => {
       name,
       about: description,
     });
+    setName('');
+    setDescription('');
   }
 
 
