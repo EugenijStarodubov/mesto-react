@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/Api';
 import { popups } from '../utils/utils';
@@ -16,7 +17,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
 
-  const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '' });
+  const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '', avatar: '' });
+
+
+  console.log(currentUser)
+
 
   React.useEffect(() => {
     api.getUser()
@@ -30,11 +35,18 @@ function App() {
     return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || selectedCard.isOpen)
       ? document.addEventListener('keydown', close)
       : () => document.removeEventListener('keydown', close);
-  });
+  }, []);
 
   const handleUpdateUser = (values) => {
     api.updateUser(values)
       .then(data => setCurrentUser(data))
+      .catch(err => console.log(err.message));
+    closeAllPopups({});
+  }
+
+  const handleUpdateAvatar = (link) => {
+    api.setAvatar(link)
+      .then(link => setCurrentUser(link))
       .catch(err => console.log(err.message));
     closeAllPopups({});
   }
@@ -85,12 +97,23 @@ function App() {
 
           <div className="page__popup-wrapper">
 
-            <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} buttonLabel={popups.buttonPopupsWithForm} />
+            <EditProfilePopup isOpen={isEditProfileOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+              buttonLabel={popups.buttonPopupsWithForm} />
+
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+              buttonLabel={popups.buttonPopupsWithForm}
+
+            />
 
             <PopupWithForm title="Новое место" name="type_add"
               isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
-              buttonLabel={popups.buttonPopupsWithForm}>
+              buttonLabel={popups.buttonPopupsWithForm}
+            >
 
               <label className="popup__form-field" >
                 <input id="name-input" type="text"
@@ -107,18 +130,7 @@ function App() {
               </label>
             </PopupWithForm>
 
-            <PopupWithForm title="Обновить аватар" name="type_set-avatar"
-              isOpen={isEditAvatarPopupOpen}
-              onClose={closeAllPopups}
-              buttonLabel={popups.buttonPopupsWithForm}>
 
-              <label className="popup__form-field" >
-                <input id="name-input" type="url"
-                  className="popup__input popup__input_field_name"
-                  name="avatar" placeholder="Ссылка на аватар" required />
-                <span id="name-input-error" className="popup__error"></span>
-              </label>
-            </PopupWithForm >
 
             <PopupWithForm title="Вы уверены?" name="type_confirm" />
 
