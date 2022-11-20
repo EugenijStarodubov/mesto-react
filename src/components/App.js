@@ -8,7 +8,6 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/Api';
-import { popups } from '../utils/utils';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function App() {
@@ -23,6 +22,8 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
 
   const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '', avatar: '' });
+
+  const [ButtonLabelIsLoad, setButtonLabel] = React.useState('Сохранить');
 
   const [cards, setCards] = React.useState([]);
 
@@ -58,6 +59,8 @@ function App() {
   }
 
   const handleCardDelete = (id) => {
+    setButtonLabel('Удаление...')
+
     const newCards = cards.filter(c =>
       id !== c._id
     );
@@ -68,6 +71,7 @@ function App() {
   }
 
   const handleUpdateUser = (values) => {
+    setButtonLabel('Сохранение...');
     api.updateUser(values)
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message));
@@ -75,6 +79,7 @@ function App() {
   }
 
   const handleUpdateAvatar = (link) => {
+    setButtonLabel('Сохранение...')
     api.setAvatar(link)
       .then(link => setCurrentUser(link))
       .catch(err => console.log(err.message));
@@ -82,6 +87,7 @@ function App() {
   }
 
   const handleAddPlaceSubmit = (card) => {
+    setButtonLabel('Сохранение...')
     api.updateCards(card).then(
       card => setCards([...cards, card]))
       .catch(err => console.log(err.message));
@@ -96,18 +102,22 @@ function App() {
   }
 
   const handleIsAddPlacePopupOpen = () => {
+    setButtonLabel('Сохранить');
     setIsAddPlacePopupOpen(true);
   };
 
   const handleIsEditProfileOpen = () => {
+    setButtonLabel('Сохранить');
     setIsEditProfileOpen(true);
   };
 
   const handleIsEditAvatarPopupOpen = () => {
+    setButtonLabel('Сохранить');
     setIsEditAvatarPopupOpen(true);
   };
 
   const handleIsConfirmPopupOpen = (id) => {
+    setButtonLabel('Да');
     setIsConfirmPopupOpen(true);
     setDeletedCerdId(id);
   };
@@ -121,6 +131,7 @@ function App() {
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
+
 
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
     setSelectedCard({ name: card.name, link: card.link, isOpen: false });
@@ -154,25 +165,25 @@ function App() {
             <EditProfilePopup isOpen={isEditProfileOpen}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
-              buttonLabel={popups.buttonPopupsWithForm} />
+              buttonLabel={ButtonLabelIsLoad} />
 
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
-              buttonLabel={popups.buttonPopupsWithForm}
+              buttonLabel={ButtonLabelIsLoad}
             />
 
             <AddPlacePopup isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
-              buttonLabel={popups.buttonPopupsWithForm}
+              buttonLabel={ButtonLabelIsLoad}
             />
 
             <PopupWithForm title="Вы уверены?" name="type_confirm"
               isOpen={isConfirmPopupOpen}
               onSubmit={handleConfirmSubmit}
               onClose={closeAllPopups}
-              buttonLabel={popups.buttonPopupsWithConfirm}
+              buttonLabel={ButtonLabelIsLoad}
             />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />

@@ -7,10 +7,6 @@ export const config = {
   errorClass: 'popup__error_visible',
 };
 
-export const popups = {
-  buttonPopupsWithForm: 'Сохранить',
-  buttonPopupsWithConfirm: 'Да',
-}
 
 
 
