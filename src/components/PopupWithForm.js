@@ -1,7 +1,11 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 function PopupWithForm(props) {
 
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+  useEffect(() => {
+    setSubmitButtonDisabled(props.isSubmitButtonDisabled);
+  }, [props.isSubmitButtonDisabled]);
 
   return (
     <div className={`popup popup_${props.name} popup_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}
@@ -30,9 +34,12 @@ function PopupWithForm(props) {
           {props.children}
 
           <button type="submit"
-            className={`button popup__button popup__button_${props.name}`}
+            className={`button popup__button popup__button_${props.name}
+            popup__button${isSubmitButtonDisabled ? '_disabled' : ''}`}
             aria-label={props.buttonLabel}
-            name={`form-button_${props.name}`}>
+            name={`form-button_${props.name}`}
+            disabled={isSubmitButtonDisabled}
+          >
             {props.buttonLabel}
           </button>
         </form>

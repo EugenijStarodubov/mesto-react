@@ -134,7 +134,7 @@ function App() {
 
 
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
-    setSelectedCard({ name: card.name, link: card.link, isOpen: false });
+    (card) && setSelectedCard({ name: card.name, link: card.link, isOpen: false });
   };
 
 
