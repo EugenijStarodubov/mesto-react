@@ -4,22 +4,26 @@ import { useInput } from "../customHooks/useInput";
 
 const AddPlacePopup = (props) => {
 
-  const [cardName, setCardName] = React.useState('');
-  const [cardUrl, setCardUrl] = React.useState('');
-
   const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onAddPlace({
-      name: cardName,
-      link: cardUrl
+      name: cardNameInput.value,
+      link: urlInput.value
     });
     {
-      setCardName('');
-      setCardUrl('');
+      cardNameInput.setValue('');
+      urlInput.setValue('');
     }
+  }
+
+  const handleClose = () => {
+    cardNameInput.setValue('');
+    urlInput.setValue('');
+
+    props.onClose();
   }
 
   const cardNameInput = useInput('', {
@@ -28,16 +32,19 @@ const AddPlacePopup = (props) => {
   });
   const urlInput = useInput('', {
     'isEmpty': true,
-    'minLength': 2,
-    'isUrl': true
+    'isUrl': true,
   });
+
+
 
   return (
     <PopupWithForm title="Новое место" name="type_add"
       isOpen={props.isOpen}
-      onClose={props.onClose}
+      onClose={handleClose}
       onSubmit={handleSubmit}
       buttonLabel={props.buttonLabel}
+      cardNameInputValid={cardNameInput.isInputValid}
+      urlInputValid={urlInput.isInputValid}
     >
 
       <label className="popup__form-field" >
@@ -47,8 +54,9 @@ const AddPlacePopup = (props) => {
           value={cardNameInput.value}
           onChange={(e => cardNameInput.onChange(e))}
           // onChange={(e => setCardName(e.target.value))}
+          noValidate
           required />
-        <span id="name-input-error" className={`popup__error ${cardNameInput.isErrorVisible}`}>{cardNameInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error ${!cardNameInput.isEmpty || cardNameInput.isInputValid ? cardNameInput.isErrorVisible : ''}`}>{cardNameInput.errorMessage}</span>
       </label>
 
       <label className="popup__form-field" >
@@ -57,10 +65,12 @@ const AddPlacePopup = (props) => {
           name="link" placeholder="Ссылка на картинку"
           value={urlInput.value}
           onChange={(e => urlInput.onChange(e))}
+          noValidate
+
           // onChange={(e => setCardUrl(e.target.value))}
           required />
 
-        <span id="name-input-error" className={`popup__error ${urlInput.isErrorVisible}`}>{urlInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error ${!urlInput.isEmpty || urlInput.isInputValid ? urlInput.isErrorVisible : ''}`}>{urlInput.errorMessage}</span>
       </label>
     </PopupWithForm>
   );

@@ -7,8 +7,8 @@ const useValidation = (value, validators) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isErrorVisible, setErrorVisible] = useState('');
 
-  const [isEmpty, setEmpty] = useState(true);
-  const [minLengthError, setMinLengthError] = useState(true);
+  const [isEmpty, setEmpty] = useState(false);
+  const [minLengthError, setMinLengthError] = useState(false);
   const [isUrlError, setUrlError] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const useValidation = (value, validators) => {
           (value) ? setEmpty(false) : setEmpty(true);
           break;
         case 'minLength':
-          if (value.length < validators[validator]) {
+          if ((value.length < validators[validator])) {
             setMinLengthError(true);
             setErrorMessage('Поле не может быть короче двух символов');
             setErrorVisible('popup__error_visible');
@@ -29,15 +29,15 @@ const useValidation = (value, validators) => {
           }
           break;
         case 'isUrl':
-          const regExp = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-          if (!regExp.test(String(value).toLowerCase()) && !isEmpty) {
-            setUrlError(true);
-            setErrorMessage('Введите корректный Url-адрес');
-            setErrorVisible('popup__error_visible');
-          } else {
+          const regExp = /[-a-zA-Z0-9@:%_\+.~#?&\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/=]*)?/gi;
+          if (regExp.test(String(value).toLowerCase())) {
             setUrlError(false);
             setErrorMessage('');
             setErrorVisible('');
+          } else {
+            setUrlError(true);
+            setErrorMessage('Введите корректный Url-адрес');
+            setErrorVisible('popup__error_visible');
           }
           break;
       }
@@ -51,10 +51,9 @@ const useValidation = (value, validators) => {
   }, [isEmpty, minLengthError, isUrlError]);
 
   return {
+    isEmpty,
     errorMessage,
     isErrorVisible,
-    minLengthError,
-    isUrlError,
     isInputValid
   }
 }

@@ -1,12 +1,34 @@
 import { useEffect, useState } from 'react';
 
 function PopupWithForm(props) {
+  if (!props.nameInputValid) {
+    console.log('ok')
+  }
 
-  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
+
+
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+  const [isFormInvalid, setFormInvalid] = useState(true);
+
   useEffect(() => {
-    setSubmitButtonDisabled(props.isSubmitButtonDisabled);
-  }, [props.isSubmitButtonDisabled]);
+    (props.nameInputValid && props.aboutInputValid)
+      ? setFormInvalid(true)
+      : setFormInvalid(false)
+  }, [props.nameInputValid, props.aboutInputValid]);
 
+  useEffect(() => {
+    (props.cardNameInputValid && props.urlInputValid)
+      ? setFormInvalid(true)
+      : setFormInvalid(false)
+  }, [props.cardNameInputValid, props.urlInputValid]);
+
+  useEffect(() => {
+    isFormInvalid
+      ? setSubmitButtonDisabled(false)
+      : setSubmitButtonDisabled(true)
+  }, [isFormInvalid]);
+
+  console.group(props)
   return (
     <div className={`popup popup_${props.name} popup_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}
       onClick={

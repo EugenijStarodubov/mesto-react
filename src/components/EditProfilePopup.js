@@ -8,7 +8,7 @@ const EditProfilePopup = (props) => {
 
   const { currentUser } = useContext(CurrentUserContext);
 
-  const [isFormInvalid, setFormInvalid] = useState(false);
+
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -46,21 +46,17 @@ const EditProfilePopup = (props) => {
     props.onClose();
   }
 
-  useEffect(() => {
-    (nameInput.isInputValid && aboutInput.isInputValid)
-      ? setFormInvalid(false)
-      : setFormInvalid(true)
-  }, [isFormInvalid, nameInput.isInputValid, aboutInput.isInputValid]);
 
 
-  console.log(isFormInvalid)
+
   return (
     <PopupWithForm title="Редактировать профиль" name="type_edit"
       isOpen={props.isOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
       buttonLabel={props.buttonLabel}
-      isSubmitButtonDisabled={isFormInvalid}
+      aboutInputValid={aboutInput.isInputValid}
+      nameInputValid={nameInput.isInputValid}
     >
 
       <label className="popup__form-field" >
