@@ -1,40 +1,20 @@
 import { useEffect, useState } from 'react';
 
 function PopupWithForm(props) {
-  if (!props.nameInputValid) {
-    console.log('ok')
-  }
-
-
 
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-  const [isFormInvalid, setFormInvalid] = useState(true);
 
   useEffect(() => {
-    (props.nameInputValid && props.aboutInputValid)
-      ? setFormInvalid(true)
-      : setFormInvalid(false)
-  }, [props.nameInputValid, props.aboutInputValid]);
-
-  useEffect(() => {
-    (props.cardNameInputValid && props.urlInputValid)
-      ? setFormInvalid(true)
-      : setFormInvalid(false)
-  }, [props.cardNameInputValid, props.urlInputValid]);
-
-  useEffect(() => {
-    isFormInvalid
+    props.isFormValid
       ? setSubmitButtonDisabled(false)
-      : setSubmitButtonDisabled(true)
-  }, [isFormInvalid]);
+      : setSubmitButtonDisabled(true);
+  }, [props.isFormValid]);
 
-  console.group(props)
   return (
     <div className={`popup popup_${props.name} popup_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}
       onClick={
         (e) => {
           (e.target === e.currentTarget) && props.onClose({})
-
         }
       }>
       <div className="popup__modal-window" >
@@ -57,10 +37,10 @@ function PopupWithForm(props) {
 
           <button type="submit"
             className={`button popup__button popup__button_${props.name}
-            popup__button${isSubmitButtonDisabled ? '_disabled' : ''}`}
+            popup__button${(isSubmitButtonDisabled && (props.name !== 'type_confirm')) ? '_disabled' : ''}`}
             aria-label={props.buttonLabel}
             name={`form-button_${props.name}`}
-            disabled={isSubmitButtonDisabled}
+            disabled={(props.name === 'type_confirm') ? false : isSubmitButtonDisabled}
           >
             {props.buttonLabel}
           </button>

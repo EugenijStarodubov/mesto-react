@@ -1,14 +1,11 @@
-import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { useInput } from "../customHooks/useInput";
 
 const AddPlacePopup = (props) => {
 
   const handleSubmit = (e) => {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
-    // Передаём значения управляемых компонентов во внешний обработчик
     props.onAddPlace({
       name: cardNameInput.value,
       link: urlInput.value
@@ -43,8 +40,7 @@ const AddPlacePopup = (props) => {
       onClose={handleClose}
       onSubmit={handleSubmit}
       buttonLabel={props.buttonLabel}
-      cardNameInputValid={cardNameInput.isInputValid}
-      urlInputValid={urlInput.isInputValid}
+      isFormValid={cardNameInput.isInputValid && urlInput.isInputValid}
     >
 
       <label className="popup__form-field" >
@@ -53,7 +49,6 @@ const AddPlacePopup = (props) => {
           name="name" placeholder="Название"
           value={cardNameInput.value}
           onChange={(e => cardNameInput.onChange(e))}
-          // onChange={(e => setCardName(e.target.value))}
           noValidate
           required />
         <span id="name-input-error" className={`popup__error ${!cardNameInput.isEmpty || cardNameInput.isInputValid ? cardNameInput.isErrorVisible : ''}`}>{cardNameInput.errorMessage}</span>
@@ -66,8 +61,6 @@ const AddPlacePopup = (props) => {
           value={urlInput.value}
           onChange={(e => urlInput.onChange(e))}
           noValidate
-
-          // onChange={(e => setCardUrl(e.target.value))}
           required />
 
         <span id="name-input-error" className={`popup__error ${!urlInput.isEmpty || urlInput.isInputValid ? urlInput.isErrorVisible : ''}`}>{urlInput.errorMessage}</span>

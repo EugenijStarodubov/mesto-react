@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-
 const useValidation = (value, validators) => {
-  const [isInputValid, setInputValid] = useState(false);
+  const [isInputValid, setInputValid] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState('');
   const [isErrorVisible, setErrorVisible] = useState('');

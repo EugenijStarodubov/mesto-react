@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer'
@@ -8,29 +8,27 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/Api';
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
 
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditProfileOpen, setIsEditProfileOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
 
-  const [deletedCardId, setDeletedCerdId] = React.useState('')
+  const [deletedCardId, setDeletedCerdId] = useState('')
 
-  const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '', isOpen: false });
+  const [selectedCard, setSelectedCard] = useState({ name: '', link: '', isOpen: false });
 
-  const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '', avatar: '' });
+  const [currentUser, setCurrentUser] = useState({ name: '', about: '', id: '', avatar: '' });
 
-  const [ButtonLabelIsLoad, setButtonLabel] = React.useState('Сохранить');
+  const [ButtonLabelIsLoad, setButtonLabel] = useState('Сохранить');
 
-  const [cards, setCards] = React.useState([]);
-
-
-  React.useEffect(() => {
+  const [cards, setCards] = useState([]);
 
 
+  useEffect(() => {
     api.getCards().then(
       cards => setCards(cards))
       .catch(err => console.log(err.message));
@@ -38,9 +36,9 @@ function App() {
     api.getUser()
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message))
-  }, [])
+  }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const close = (e) => { (e.key === 'Escape') && closeAllPopups({}) };
 
     return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || isConfirmPopupOpen || selectedCard.isOpen)
@@ -56,7 +54,7 @@ function App() {
       setCards(newCards);
     })
       .catch(err => console.log(err.message));
-  }
+  };
 
   const handleCardDelete = (id) => {
     setButtonLabel('Удаление...')
@@ -68,7 +66,7 @@ function App() {
       setCards(newCards);
     })
       .catch(err => console.log(err.message));
-  }
+  };
 
   const handleUpdateUser = (values) => {
     setButtonLabel('Сохранение...');
@@ -76,7 +74,7 @@ function App() {
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message));
     closeAllPopups({});
-  }
+  };
 
   const handleUpdateAvatar = (link) => {
     setButtonLabel('Сохранение...')
@@ -84,7 +82,7 @@ function App() {
       .then(link => setCurrentUser(link))
       .catch(err => console.log(err.message));
     closeAllPopups({});
-  }
+  };
 
   const handleAddPlaceSubmit = (card) => {
     setButtonLabel('Сохранение...')
@@ -92,14 +90,14 @@ function App() {
       card => setCards([...cards, card]))
       .catch(err => console.log(err.message));
     closeAllPopups({});
-  }
+  };
 
   const handleConfirmSubmit = (e) => {
     e.preventDefault();
     handleCardDelete(deletedCardId);
     setDeletedCerdId('');
     closeAllPopups({});
-  }
+  };
 
   const handleIsAddPlacePopupOpen = () => {
     setButtonLabel('Сохранить');
@@ -132,12 +130,9 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
 
-
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
     (card) && setSelectedCard({ name: card.name, link: card.link, isOpen: false });
   };
-
-
 
   return (
     <CurrentUserContext.Provider value={{

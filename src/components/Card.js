@@ -1,11 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import DeleteButton from './DeleteButton'
 
 function Card(props) {
 
-
-  const { currentUser } = React.useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const handleClick = () => {
     props.onClick(props.card);

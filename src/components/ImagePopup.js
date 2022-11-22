@@ -1,9 +1,4 @@
-import React from "react";
-
 function ImagePopup(props) {
-
-  // при клике по самому попапу: e.target = class="popup__image popup__item", e.currentTarget = popup
-  // при клике за его пределами: e.target = e.currentTarget = popup
 
   return (
 
@@ -18,7 +13,6 @@ function ImagePopup(props) {
         <img src={props.card.link} alt={props.card.name} className="popup__image popup__item" />
         <figcaption className="popup__image-caption">{props.card.name}</figcaption>
       </figure>
-
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import React from "react";
+// * Валидация не реализовывалась в связи с тем, что по брифу инпут неуправляемы
+
+import { useRef } from "react";
 import PopupWithForm from "./PopupWithForm";
-
-
 
 const EditAvatarPopup = (props) => {
 
-  const avatarInputRef = React.useRef();
+  const avatarInputRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +16,18 @@ const EditAvatarPopup = (props) => {
     avatarInputRef.current.value = '';
   }
 
+  const handleClose = () => {
+    avatarInputRef.current.value = '';
+    props.onClose({});
+  }
+
   return (
     <PopupWithForm title="Обновить аватар" name="type_set-avatar"
       isOpen={props.isOpen}
-      onClose={props.onClose}
+      onClose={handleClose}
       onSubmit={handleSubmit}
-      buttonLabel={props.buttonLabel}>
+      buttonLabel={props.buttonLabel}
+      isFormValid={true}>
 
       <label className="popup__form-field" >
         <input ref={avatarInputRef} id="name-input" type="url"
@@ -31,7 +37,6 @@ const EditAvatarPopup = (props) => {
       </label>
     </PopupWithForm >
   );
-
 };
 
 export default EditAvatarPopup;

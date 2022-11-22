@@ -8,10 +8,6 @@ const EditProfilePopup = (props) => {
 
   const { currentUser } = useContext(CurrentUserContext);
 
-
-
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
   useEffect(() => {
     nameInput.setValue(currentUser.name);
     aboutInput.setValue(currentUser.about);
@@ -27,13 +23,11 @@ const EditProfilePopup = (props) => {
   });
 
   const handleSubmit = (e) => {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
     nameInput.setValue(nameInput.value);
     aboutInput.setValue(aboutInput.value);
 
-    // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateUser({
       name: nameInput.value,
       about: aboutInput.value,
@@ -46,17 +40,13 @@ const EditProfilePopup = (props) => {
     props.onClose();
   }
 
-
-
-
   return (
     <PopupWithForm title="Редактировать профиль" name="type_edit"
       isOpen={props.isOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
       buttonLabel={props.buttonLabel}
-      aboutInputValid={aboutInput.isInputValid}
-      nameInputValid={nameInput.isInputValid}
+      isFormValid={aboutInput.isInputValid && nameInput.isInputValid}
     >
 
       <label className="popup__form-field" >
@@ -82,6 +72,6 @@ const EditProfilePopup = (props) => {
       </label>
     </PopupWithForm>
   )
-}
+};
 
 export default EditProfilePopup;

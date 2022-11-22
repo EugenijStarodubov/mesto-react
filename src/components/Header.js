@@ -1,7 +1,4 @@
-import React from 'react';
-
 import logo from '../images/header/logo.svg';
-
 
 function Header() {
   return (
