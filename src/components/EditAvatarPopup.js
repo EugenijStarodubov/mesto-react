@@ -18,7 +18,7 @@ const EditAvatarPopup = (props) => {
 
   const handleClose = () => {
     avatarInputRef.current.value = '';
-    props.onClose({});
+    props.onClose();
   }
 
   return (
@@ -26,7 +26,7 @@ const EditAvatarPopup = (props) => {
       isOpen={props.isOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
-      buttonLabel={props.buttonLabel}
+      buttonLabel={props.isLoading ? 'Сохранение...' : 'Обновить автар'}
       isFormValid={true}>
 
       <label className="popup__form-field" >

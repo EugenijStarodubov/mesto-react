@@ -45,7 +45,7 @@ const EditProfilePopup = (props) => {
       isOpen={props.isOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
-      buttonLabel={props.buttonLabel}
+      buttonLabel={props.isLoading ? 'Сохранение...' : 'Сохранить'}
       isFormValid={aboutInput.isInputValid && nameInput.isInputValid}
     >
 

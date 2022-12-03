@@ -17,15 +17,15 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
 
-  const [deletedCardId, setDeletedCerdId] = useState('')
+  const [deletedCardId, setDeletedCardId] = useState('')
 
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '', isOpen: false });
 
   const [currentUser, setCurrentUser] = useState({ name: '', about: '', id: '', avatar: '' });
 
-  const [ButtonLabelIsLoad, setButtonLabel] = useState('Сохранить');
-
   const [cards, setCards] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
@@ -49,8 +49,7 @@ function App() {
   };
 
   const handleCardDelete = (id) => {
-    setButtonLabel('Удаление...')
-
+    setIsLoading(true);
     const newCards = cards.filter(c =>
       id !== c._id
     );
@@ -61,55 +60,56 @@ function App() {
   };
 
   const handleUpdateUser = (values) => {
-    setButtonLabel('Сохранение...');
+    setIsLoading(true);
     api.updateUser(values)
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message));
-    closeAllPopups({});
+    closeAllPopups();
   };
 
   const handleUpdateAvatar = (link) => {
-    setButtonLabel('Сохранение...')
+    setIsLoading(true);
     api.setAvatar(link)
       .then(link => setCurrentUser(link))
       .catch(err => console.log(err.message));
-    closeAllPopups({});
+    closeAllPopups();
   };
 
   const handleAddPlaceSubmit = (card) => {
-    setButtonLabel('Сохранение...')
+    setIsLoading(true);
     api.updateCards(card).then(
       card => setCards([...cards, card]))
       .catch(err => console.log(err.message));
-    closeAllPopups({});
+    closeAllPopups();
   };
 
   const handleConfirmSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
     handleCardDelete(deletedCardId);
-    setDeletedCerdId('');
-    closeAllPopups({});
+    setDeletedCardId('');
+    closeAllPopups();
   };
 
   const handleIsAddPlacePopupOpen = () => {
-    setButtonLabel('Сохранить');
+    setIsLoading(false);
     setIsAddPlacePopupOpen(true);
   };
 
   const handleIsEditProfileOpen = () => {
-    setButtonLabel('Сохранить');
+    setIsLoading(false);
     setIsEditProfileOpen(true);
   };
 
   const handleIsEditAvatarPopupOpen = () => {
-    setButtonLabel('Сохранить');
+    setIsLoading(false);
     setIsEditAvatarPopupOpen(true);
   };
 
   const handleIsConfirmPopupOpen = (id) => {
-    setButtonLabel('Да');
+    setIsLoading(false);
     setIsConfirmPopupOpen(true);
-    setDeletedCerdId(id);
+    setDeletedCardId(id);
   };
 
   const handleCardClick = (card) => {
@@ -152,25 +152,26 @@ function App() {
             <EditProfilePopup isOpen={isEditProfileOpen}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
-              buttonLabel={ButtonLabelIsLoad} />
+              isLoading={isLoading} />
 
             <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
-              buttonLabel={ButtonLabelIsLoad}
-            />
+              isLoading={isLoading}
+              />
 
             <AddPlacePopup isOpen={isAddPlacePopupOpen}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
-              buttonLabel={ButtonLabelIsLoad}
+              isLoading={isLoading}
             />
 
             <PopupWithForm title="Вы уверены?" name="type_confirm"
               isOpen={isConfirmPopupOpen}
               onSubmit={handleConfirmSubmit}
               onClose={closeAllPopups}
-              buttonLabel={ButtonLabelIsLoad}
+              isLoading={isLoading}
+              buttonLabel={isLoading ? 'Удаление...' : 'Да'}
             />
 
             <ImagePopup card={selectedCard} onClose={closeAllPopups} />

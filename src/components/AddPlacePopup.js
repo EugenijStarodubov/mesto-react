@@ -39,7 +39,7 @@ const AddPlacePopup = (props) => {
       isOpen={props.isOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
-      buttonLabel={props.buttonLabel}
+      buttonLabel={props.isLoading ? 'Сохранение...' : 'Сохранить'}
       isFormValid={cardNameInput.isInputValid && urlInput.isInputValid}
     >
 
