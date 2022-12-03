@@ -3,7 +3,7 @@ const DeleteButton = (props) => {
 
   return (
     <button className="button places__delete-button" type="button"
-      onClick={props.onClick}>
+      {...props}>
     </button>
   );
 };
