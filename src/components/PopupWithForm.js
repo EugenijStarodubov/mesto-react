@@ -1,48 +1,51 @@
 import { useEffect, useState } from 'react';
+import useClose from '../customHooks/useClose';
 
-function PopupWithForm(props) {
+function PopupWithForm( {isFormValid, name, isOpen, onClose, onSubmit, title, buttonLabel, children}) {
+
+	useClose(isOpen, onClose);
 
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   useEffect(() => {
-    props.isFormValid
+    isFormValid
       ? setSubmitButtonDisabled(false)
       : setSubmitButtonDisabled(true);
-  }, [props.isFormValid]);
+  }, [isFormValid]);
 
   return (
-    <div className={`popup popup_${props.name} popup_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}
+    <div className={`popup popup_${name} popup_${name} ${isOpen ? 'popup_opened' : ''}`}
       onClick={
         (e) => {
-          (e.target === e.currentTarget) && props.onClose({})
+          (e.target === e.currentTarget) && onClose()
         }
       }>
       <div className="popup__modal-window" >
         <button className="button popup__close-button"
           type="button"
           aria-label="Закрыть"
-          onClick={props.onClose}>
+          onClick={onClose}>
         </button>
 
         <form action="#"
-          className={`popup__form popup__form_${props.name}`}
+          className={`popup__form popup__form_${name}`}
           method="POST"
-          name={`form-${props.name}`}
-          id={`form-${props.name}`}
-          onSubmit={props.onSubmit}
+          name={`form-${name}`}
+          id={`form-${name}`}
+          onSubmit={onSubmit}
         >
-          <h2 className="title popup__title">{props.title}</h2>
+          <h2 className="title popup__title">{title}</h2>
 
-          {props.children}
+          {children}
 
           <button type="submit"
-            className={`button popup__button popup__button_${props.name}
-            popup__button${(isSubmitButtonDisabled && (props.name !== 'type_confirm')) ? '_disabled' : ''}`}
-            aria-label={props.buttonLabel}
-            name={`form-button_${props.name}`}
-            disabled={(props.name === 'type_confirm') ? false : isSubmitButtonDisabled}
+            className={`button popup__button popup__button_${name}
+            popup__button${(isSubmitButtonDisabled && (name !== 'type_confirm')) ? '_disabled' : ''}`}
+            aria-label={buttonLabel}
+            name={`form-button_${name}`}
+            disabled={(name === 'type_confirm') ? false : isSubmitButtonDisabled}
           >
-            {props.buttonLabel}
+            {buttonLabel}
           </button>
         </form>
       </div>

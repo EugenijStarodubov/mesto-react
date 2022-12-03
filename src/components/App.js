@@ -38,14 +38,6 @@ function App() {
       .catch(err => console.log(err.message))
   }, []);
 
-  useEffect(() => {
-    const close = (e) => { (e.key === 'Escape') && closeAllPopups({}) };
-
-    return (isAddPlacePopupOpen || isEditProfileOpen || isEditAvatarPopupOpen || isConfirmPopupOpen || selectedCard.isOpen)
-      ? document.addEventListener('keydown', close)
-      : () => document.removeEventListener('keydown', close);
-  });
-
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -124,7 +116,7 @@ function App() {
     setSelectedCard({ name: card.name, link: card.link, isOpen: true })
   };
 
-  const closeAllPopups = (card) => {
+  const closeAllPopups = (card = null) => {
     setIsAddPlacePopupOpen(false);
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
