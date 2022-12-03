@@ -25,9 +25,6 @@ const EditProfilePopup = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    nameInput.setValue(nameInput.value);
-    aboutInput.setValue(aboutInput.value);
-
     props.onUpdateUser({
       name: nameInput.value,
       about: aboutInput.value,
@@ -54,7 +51,7 @@ const EditProfilePopup = (props) => {
           className="popup__input popup__input_field_name"
           name="name" placeholder={"Имя"}
           value={nameInput.value}
-          onChange={(e) => nameInput.onChange(e)}
+          onChange={nameInput.onChange}
           noValidate
           required />
         <span id="name-input-error" className={`popup__error ${nameInput.isErrorVisible}`}>{nameInput.errorMessage}</span>
@@ -65,7 +62,7 @@ const EditProfilePopup = (props) => {
           className="popup__input popup__input_field_name"
           name="about" placeholder="Обо мне"
           value={aboutInput.value}
-          onChange={(e) => aboutInput.onChange(e)}
+          onChange={aboutInput.onChange}
           noValidate
           required />
         <span id="name-input-error" className={`popup__error ${aboutInput.isErrorVisible}`}>{aboutInput.errorMessage}</span>
