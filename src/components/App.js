@@ -123,7 +123,7 @@ function App() {
     setIsConfirmPopupOpen(false);
 
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
-    (card) && setSelectedCard({ name: card.name, link: card.link, isOpen: false });
+    (card) && setSelectedCard({ ...selectedCard, isOpen: false });
   };
 
   return (
