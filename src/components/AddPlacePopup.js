@@ -32,8 +32,6 @@ const AddPlacePopup = (props) => {
     'isUrl': true,
   });
 
-
-
   return (
     <PopupWithForm title="Новое место" name="type_add"
       isOpen={props.isOpen}
@@ -51,7 +49,7 @@ const AddPlacePopup = (props) => {
           onChange={(e => cardNameInput.onChange(e))}
           noValidate
           required />
-        <span id="name-input-error" className={`popup__error ${!cardNameInput.isEmpty || cardNameInput.isInputValid ? cardNameInput.isErrorVisible : ''}`}>{cardNameInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error ${!cardNameInput.isEmpty || cardNameInput.isInputValid ? 'popup__error_visible' : ''}`}>{cardNameInput.errorMessage}</span>
       </label>
 
       <label className="popup__form-field" >
@@ -63,7 +61,7 @@ const AddPlacePopup = (props) => {
           noValidate
           required />
 
-        <span id="name-input-error" className={`popup__error ${!urlInput.isEmpty || urlInput.isInputValid ? urlInput.isErrorVisible : ''}`}>{urlInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error ${!urlInput.isEmpty || urlInput.isInputValid ? 'popup__error_visible' : ''}`}>{urlInput.errorMessage}</span>
       </label>
     </PopupWithForm>
   );

@@ -4,7 +4,6 @@ const useValidation = (value, validators) => {
   const [isInputValid, setInputValid] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState('');
-  const [isErrorVisible, setErrorVisible] = useState('');
 
   const [isEmpty, setEmpty] = useState(false);
   const [minLengthError, setMinLengthError] = useState(false);
@@ -20,11 +19,9 @@ const useValidation = (value, validators) => {
           if ((value.length < validators[validator])) {
             setMinLengthError(true);
             setErrorMessage('Поле не может быть короче двух символов');
-            setErrorVisible('popup__error_visible');
           } else {
             setMinLengthError(false);
             setErrorMessage('');
-            setErrorVisible('');
           }
           break;
         case 'isUrl':
@@ -32,11 +29,9 @@ const useValidation = (value, validators) => {
           if (regExp.test(String(value).toLowerCase())) {
             setUrlError(false);
             setErrorMessage('');
-            setErrorVisible('');
           } else {
             setUrlError(true);
             setErrorMessage('Введите корректный Url-адрес');
-            setErrorVisible('popup__error_visible');
           }
           break;
       }
@@ -52,7 +47,6 @@ const useValidation = (value, validators) => {
   return {
     isEmpty,
     errorMessage,
-    isErrorVisible,
     isInputValid
   }
 }

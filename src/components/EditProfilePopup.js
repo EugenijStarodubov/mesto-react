@@ -54,7 +54,7 @@ const EditProfilePopup = (props) => {
           onChange={nameInput.onChange}
           noValidate
           required />
-        <span id="name-input-error" className={`popup__error ${nameInput.isErrorVisible}`}>{nameInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error ${!nameInput.isInputValid ? 'popup__error_visible' : ''}`}>{nameInput.errorMessage}</span>
       </label>
 
       <label className="popup__form-field" >
@@ -65,7 +65,7 @@ const EditProfilePopup = (props) => {
           onChange={aboutInput.onChange}
           noValidate
           required />
-        <span id="name-input-error" className={`popup__error ${aboutInput.isErrorVisible}`}>{aboutInput.errorMessage}</span>
+        <span id="name-input-error" className={`popup__error  ${!aboutInput.isInputValid ? 'popup__error_visible' : ''}`}>{aboutInput.errorMessage}</span>
       </label>
     </PopupWithForm>
   )
