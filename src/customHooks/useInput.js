@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useValidation = (value, validators) => {
-  const [isInputValid, setInputValid] = useState(true);
+  // const [isInputValid, setInputValid] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -38,11 +38,7 @@ const useValidation = (value, validators) => {
     }
   }, [value]);
 
-  useEffect(() => {
-    (isEmpty || minLengthError || isUrlError)
-      ? setInputValid(false)
-      : setInputValid(true)
-  }, [isEmpty, minLengthError, isUrlError]);
+  const isInputValid =  !(isEmpty || minLengthError || isUrlError);
 
   return {
     isEmpty,
