@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import useClose from '../customHooks/useClose';
 
 function PopupWithForm( {isFormValid, name, isOpen, onClose, onSubmit, title, buttonLabel, children}) {
