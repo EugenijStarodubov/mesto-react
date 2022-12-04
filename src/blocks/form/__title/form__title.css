@@ -1,0 +1,19 @@
+.form__title {
+	box-sizing: border-box;
+	width:100%;
+	text-align: center;
+	font-weight: 900;
+	font-size: 24px;
+	line-height: 29px;
+	color: #fff;
+	margin-bottom: 50px;
+}
+
+@media screen and (min-width: 928px) {
+	form__title {
+		padding-top: 34px;
+		margin-bottom: 50px;
+		font-size: 24px;
+		line-height: 29px;
+	}
+}

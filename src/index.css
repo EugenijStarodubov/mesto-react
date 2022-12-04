@@ -56,3 +56,13 @@
 @import url('./blocks/places/__likes-counter/places__likes-counter.css');
 @import url('./blocks/popup/__confirm-window/popup__confirm-window.css');
 @import url('./blocks/profile/__avatar-container/profile__avatar-container.css');
+
+@import url('./blocks/login/login.css');
+@import url('./blocks/form/form.css');
+@import url('./blocks/form/__error/form__error.css');
+@import url('./blocks/form/__error/_visible/form__error_visible.css');
+@import url('./blocks/form/__input/form__input.css');
+@import url('./blocks/form/__input/_type_error/form__input_type_error.css');
+@import url('./blocks/form/__title/form__title.css');
+@import url('./blocks/form/__button/form__button.css');
+@import url('./blocks/form/__button/_disabled/form__button_disabled.css');

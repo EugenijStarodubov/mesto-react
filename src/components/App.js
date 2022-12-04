@@ -7,6 +7,8 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
+import Login from './Login';
+import Register from './Register';
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -135,7 +137,9 @@ function App() {
         <div className="page__container">
 
           <Header />
+<Login />
 
+<Register />
           <Main onEditProfile={handleIsEditProfileOpen}
             onAddPlace={handleIsAddPlacePopupOpen}
             onEditAvatar={handleIsEditAvatarPopupOpen}
