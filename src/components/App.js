@@ -7,8 +7,12 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
-import Login from './Login';
 import Register from './Register';
+import Login from './Login';
+import InfoTooltip from './InfoTooltip';
+
+import ProtectedRoute from './ProtectedRoute';
+import {Route, Routes } from "react-router-dom";
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -28,6 +32,10 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isOk, setIsOk] = useState(true);
 
 
   useEffect(() => {
@@ -137,21 +145,47 @@ function App() {
         <div className="page__container">
 
           <Header />
-<Login />
 
-<Register />
-          <Main onEditProfile={handleIsEditProfileOpen}
-            onAddPlace={handleIsAddPlacePopupOpen}
-            onEditAvatar={handleIsEditAvatarPopupOpen}
-            onCardClick={handleCardClick}
-            onDeleteClick={handleIsConfirmPopupOpen}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete} />
+
+
+
+          <Routes>
+
+          <Route path='/sign-up'
+                element={<Register
+                />}
+          />
+
+
+          <Route  path='/sign-in'
+               element={<Login
+               />}
+          />
+
+            <Route path="/"
+               element ={<ProtectedRoute
+                Component={Main}
+                isLoggedIn={isLoggedIn}
+                onEditProfile={handleIsEditProfileOpen}
+                onAddPlace={handleIsAddPlacePopupOpen}
+                onEditAvatar={handleIsEditAvatarPopupOpen}
+                onCardClick={handleCardClick}
+                onDeleteClick={handleIsConfirmPopupOpen}
+                cards={cards}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                />}
+            />
+
+          </Routes>
 
           <Footer />
 
           <div className="page__popup-wrapper">
+
+            <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            isOk={isOk} />
 
             <EditProfilePopup isOpen={isEditProfileOpen}
               onClose={closeAllPopups}

@@ -1,8 +1,8 @@
 import {  useEffect, useContext } from "react";
-
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useInput } from "../customHooks/useInput";
 import UserForm from "./UserForm";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const Register = ({name, isFormValid, onSubmit}) => {
@@ -40,6 +40,7 @@ const Register = ({name, isFormValid, onSubmit}) => {
       formsId={'register'}
       formsTitle={'Регистрация'}
       formsButtonLabel={'Зарегистрироваться'} />
+      <p className="register__text">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
       </div>
     </div>
   )

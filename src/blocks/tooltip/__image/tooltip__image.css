@@ -1,0 +1,8 @@
+.tooltip__image {
+  padding: 0;
+  padding-top: 60px;
+  margin: 0;
+  width: 100%;
+  max-width: 120px;
+  align-self: center;
+}

@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   margin-top: 186px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   max-width: 358px;
   width: 100%;
   min-height: 50px;
@@ -12,7 +12,6 @@
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
-
 }
 
 .form__button:not([disabled]):hover {
@@ -21,7 +20,7 @@ opacity: .85;
 
 @media screen and (min-width: 928px) {
   .form__button {
-    margin-bottom: 37px;
+    margin-bottom: 20px;
     min-height: 50px;
     font-size: 18px;
     line-height: 22px;

@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useInput } from "../customHooks/useInput";
 
 
-const UserForm = ({formsName, formsId, formsTitle, formsButtonLabel, isFormValid, onSubmit}) => {
+const UserForm = ({formsName, formsId, formsTitle, formsButtonLabel,  onSubmit}) => {
 
   const emailInput = useInput('', {
     'isEmpty': true,

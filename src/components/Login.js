@@ -40,6 +40,7 @@ const Login = ({name, isFormValid, onSubmit}) => {
       formsId={'login'}
       formsTitle={'Вход'}
       formsButtonLabel={'Войти'} />
+      <p className="register__text"></p>
       </div>
     </div>
   )

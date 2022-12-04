@@ -1,0 +1,11 @@
+.tooltip__modal-window {
+  position: relative;
+  display: flex;
+
+  max-width: 430px;
+  width: 100%;
+  min-height: 330px;
+  border-radius: 10px;
+  z-index: 5;
+
+}

@@ -57,7 +57,14 @@
 @import url('./blocks/popup/__confirm-window/popup__confirm-window.css');
 @import url('./blocks/profile/__avatar-container/profile__avatar-container.css');
 
-@import url('./blocks/login/login.css');
+@import url('./blocks/tooltip/tooltip.css');
+@import url('./blocks/tooltip/__modal-window/tooltip__modal-window.css');
+@import url('./blocks/tooltip/_opened/tooltip_opened.css');
+@import url('./blocks/tooltip/__image/tooltip__image.css');
+@import url('./blocks/tooltip/__close-button/tooltip__close-button.css');
+@import url('./blocks/tooltip/__wrapper/tooltip__wrapper.css');
+@import url('./blocks/tooltip/__title/tooltip__title.css');
+/* @import url('./blocks/login/login.css'); */
 @import url('./blocks/form/form.css');
 @import url('./blocks/form/__error/form__error.css');
 @import url('./blocks/form/__error/_visible/form__error_visible.css');
@@ -66,3 +73,5 @@
 @import url('./blocks/form/__title/form__title.css');
 @import url('./blocks/form/__button/form__button.css');
 @import url('./blocks/form/__button/_disabled/form__button_disabled.css');
+@import url('./blocks/register/__text/register__text.css');
+@import url('./blocks/register/__link/register__link.css');
