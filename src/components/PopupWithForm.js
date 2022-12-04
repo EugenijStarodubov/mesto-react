@@ -5,14 +5,6 @@ function PopupWithForm( {isFormValid, name, isOpen, onClose, onSubmit, title, bu
 
 	useClose(isOpen, onClose);
 
-  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-
-  useEffect(() => {
-    isFormValid
-      ? setSubmitButtonDisabled(false)
-      : setSubmitButtonDisabled(true);
-  }, [isFormValid]);
-
   return (
     <div className={`popup popup_${name} popup_${name} ${isOpen ? 'popup_opened' : ''}`}
       onClick={
@@ -40,10 +32,10 @@ function PopupWithForm( {isFormValid, name, isOpen, onClose, onSubmit, title, bu
 
           <button type="submit"
             className={`button popup__button popup__button_${name}
-            popup__button${(isSubmitButtonDisabled && (name !== 'type_confirm')) ? '_disabled' : ''}`}
+            popup__button${(!isFormValid && (name !== 'type_confirm')) ? '_disabled' : ''}`}
             aria-label={buttonLabel}
             name={`form-button_${name}`}
-            disabled={(name === 'type_confirm') ? false : isSubmitButtonDisabled}
+             disabled={(name !== 'type_confirm') && !isFormValid}
           >
             {buttonLabel}
           </button>
