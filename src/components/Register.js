@@ -2,7 +2,7 @@ import {  useEffect, useContext } from "react";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useInput } from "../customHooks/useInput";
 import UserForm from "./UserForm";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 const Register = ({name, isFormValid, onSubmit}) => {

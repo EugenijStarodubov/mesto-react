@@ -1,9 +1,10 @@
 .register__text {
   padding: 0;
   margin: 0;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
   Font-size: 14px;
   line-height: 17px;
   color: #fff;
    text-decoration: none;
+   min-height: 20px;
 }
