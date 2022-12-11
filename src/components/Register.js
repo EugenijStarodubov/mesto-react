@@ -1,49 +1,59 @@
-import {  useEffect, useContext } from "react";
+import {  useEffect, useContext, useState } from "react";
+import {Link, withRouter} from "react-router-dom";
+import  useClose from '../customHooks/useClose'
+
+import * as auth from "../utils/Auth";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useInput } from "../customHooks/useInput";
 import UserForm from "./UserForm";
-import {Link} from "react-router-dom";
-
-
-const Register = ({name, isFormValid, onSubmit}) => {
-
-  // const { currentUser } = useContext(CurrentUserContext);
-
-  // useEffect(() => {
-  //   nameInput.setValue(currentUser.name);
-  //   aboutInput.setValue(currentUser.about);
-  // }, [currentUser]);
+import InfoTooltip from "./InfoTooltip";
 
 
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+const Register = ({isOk, isOpen, onClose, onRegister, ...props}) => {
 
-  //   props.onUpdateUser({
-  //     name: nameInput.value,
-  //     about: aboutInput.value,
-  //   });
-  // }
 
-  // const handleClose = () => {
-  //   nameInput.setValue(currentUser.name);
-  //   aboutInput.setValue(currentUser.about);
-  //   props.onClose();
-  // }
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  onRegister(e.target.email.value, e.target.password.value);
+  }
+
+
+
+
+
+
+
 
   return (
-    <div className={`user-form`} >
-    <div className={"user-form__modal-window"} >
+    <>
+      <div className={`user-form`} >
+        <div className={"user-form__modal-window"} >
 
-     <UserForm
-      formsName={'register'}
-      formsId={'register'}
-      formsTitle={'Регистрация'}
-      formsButtonLabel={'Зарегистрироваться'} />
-      <p className="register__text">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
+          <UserForm
+            formsName={'register'}
+            formsId={'register'}
+            formsTitle={'Регистрация'}
+            formsButtonLabel={'Зарегистрироваться'}
+            onSubmit={handleSubmit}
+          />
+
+          <p className="register__text">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
+
+        </div>
       </div>
-    </div>
+
+      <InfoTooltip isOk={isOk}
+        isOpen={isOpen}
+        onClose={() => {
+          onClose();
+          props.history.push('/sign-in');}}
+       />
+
+    </>
   )
 };
 
-export default Register;
+// export default Register;
+export default withRouter(Register);

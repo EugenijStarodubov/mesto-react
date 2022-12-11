@@ -6,11 +6,12 @@ function InfoTooltip( {isOpen, isOk, onClose}) {
 
 	useClose(isOpen, onClose);
 
+
   return (
     <div className={`tooltip ${isOpen ? 'tooltip_opened' : ''}`}
       onClick={
         (e) => {
-          (e.target === e.currentTarget) && onClose()
+          (e.target === e.currentTarget)  && onClose();
         }
       }>
 

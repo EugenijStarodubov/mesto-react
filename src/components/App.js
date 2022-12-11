@@ -18,6 +18,7 @@ import ProtectedRoute from '../customHooks/ProtectedRoute';
 
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import * as auth from "../utils/Auth";
 
 function App() {
 
@@ -50,6 +51,15 @@ function App() {
       .then(data => setCurrentUser(data))
       .catch(err => console.log(err.message))
   }, []);
+
+const onRegister = async (email, password) => {
+  console.log({email, password})
+  await auth.register({ email, password});
+  setIsOk(true);
+  setIsInfoTooltipOpen(true);
+    }
+
+
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -134,6 +144,7 @@ function App() {
     setIsEditProfileOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
+    setIsInfoTooltipOpen(false);
 
     //передаем данные картинки чтобы атрибут src не обнулялся до окончания transition
     (card) && setSelectedCard({ ...selectedCard, isOpen: false });
@@ -151,6 +162,20 @@ function App() {
 
           <Switch>
 
+          <Route path='/sign-up'>
+            <Register
+              isOk={isOk}
+              isOpen={isInfoTooltipOpen}
+              onRegister={onRegister}
+              onClose={closeAllPopups}
+            />
+          </Route>
+
+          <Route  path='/sign-in'>
+            <Login
+            />
+          </Route>
+
           <ProtectedRoute exact path="/"
             сomponent={Main}
             isLoggedIn={isLoggedIn}
@@ -163,16 +188,6 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />
-
-          <Route path='/sign-up'>
-            <Register
-            />
-          </Route>
-
-          <Route  path='/sign-in'>
-            <Login
-            />
-          </Route>
 
           <Route>
           {
@@ -190,9 +205,9 @@ function App() {
 
           <div className="page__popup-wrapper">
 
-            <InfoTooltip
+            {/* <InfoTooltip
             isOpen={isInfoTooltipOpen}
-            isOk={isOk} />
+            isOk={isOk} /> */}
 
             <EditProfilePopup isOpen={isEditProfileOpen}
               onClose={closeAllPopups}

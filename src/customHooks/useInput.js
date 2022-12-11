@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 const useValidation = (value, validators) => {
-  // const [isInputValid, setInputValid] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -60,7 +59,7 @@ export const useInput = (initialValue, validators) => {
     setValue,
     value,
     onChange,
-    ...inputValidity
+     ...inputValidity
   }
 }
 
