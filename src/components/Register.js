@@ -10,21 +10,15 @@ import InfoTooltip from "./InfoTooltip";
 
 
 
-const Register = ({isOk, isOpen, onClose, onRegister, ...props}) => {
-
-
+const Register = ({isOk, setIsOk, isOpen, onClose, onRegister, ...props}) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  onRegister(e.target.email.value, e.target.password.value);
+  onRegister(e.target.email.value, e.target.password.value)
+  .then((res) => {
+     return res;
+  });
   }
-
-
-
-
-
-
-
 
   return (
     <>
@@ -48,7 +42,7 @@ const handleSubmit = (e) => {
         isOpen={isOpen}
         onClose={() => {
           onClose();
-          props.history.push('/sign-in');}}
+          if(isOk) props.history.push('/sign-in');}}
        />
 
     </>

@@ -35,11 +35,13 @@ function App() {
 
   const [cards, setCards] = useState([]);
 
+
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isOk, setIsOk] = useState(true);
+  const [isOk, setIsOk] = useState(null);
 
 
   useEffect(() => {
@@ -53,11 +55,29 @@ function App() {
   }, []);
 
 const onRegister = async (email, password) => {
-  console.log({email, password})
-  await auth.register({ email, password});
-  setIsOk(true);
-  setIsInfoTooltipOpen(true);
-    }
+
+   auth.register({ email, password})
+   .then(() => {
+    setIsOk(true);
+   })
+   .catch(err => {
+    setIsOk(false);
+    console.log(err.message);
+   })
+   .finally(() => {
+    setIsInfoTooltipOpen(true);
+
+  });
+
+  setIsOk(null);
+}
+
+const onLogin = async (email, password) => {
+
+  await auth.authorize({ email, password})
+  .catch(err => console.log(err))
+
+        }
 
 
 
@@ -164,6 +184,7 @@ const onRegister = async (email, password) => {
 
           <Route path='/sign-up'>
             <Register
+              setIsOk={setIsOk}
               isOk={isOk}
               isOpen={isInfoTooltipOpen}
               onRegister={onRegister}
@@ -173,6 +194,10 @@ const onRegister = async (email, password) => {
 
           <Route  path='/sign-in'>
             <Login
+              isOk={isOk}
+              isOpen={isInfoTooltipOpen}
+              onLogin={onLogin}
+              onClose={closeAllPopups}
             />
           </Route>
 

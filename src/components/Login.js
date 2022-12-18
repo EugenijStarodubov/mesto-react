@@ -5,31 +5,20 @@ import { useInput } from "../customHooks/useInput";
 import UserForm from "./UserForm";
 
 
-const Login = ({name, isFormValid, onSubmit}) => {
+const Login = ({name, isFormValid,  onLogin}) => {
 
-  // const { currentUser } = useContext(CurrentUserContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(e.target.email.value, e.target.password.value)
+    .then((data) => {
+      if (data.user){
+        localStorage.setItem('jwt', data.jwt);
+        return data;
+      }
+    })
 
-  // useEffect(() => {
-  //   nameInput.setValue(currentUser.name);
-  //   aboutInput.setValue(currentUser.about);
-  // }, [currentUser]);
+    }
 
-
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   props.onUpdateUser({
-  //     name: nameInput.value,
-  //     about: aboutInput.value,
-  //   });
-  // }
-
-  // const handleClose = () => {
-  //   nameInput.setValue(currentUser.name);
-  //   aboutInput.setValue(currentUser.about);
-  //   props.onClose();
-  // }
 
   return (
     <div className={`user-form`} >
@@ -39,7 +28,8 @@ const Login = ({name, isFormValid, onSubmit}) => {
       formsName={'login'}
       formsId={'login'}
       formsTitle={'Вход'}
-      formsButtonLabel={'Войти'} />
+      formsButtonLabel={'Войти'}
+      onSubmit={handleSubmit} />
       <p className="register__text"></p>
       </div>
     </div>
